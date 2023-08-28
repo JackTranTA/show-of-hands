@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS poll_choices CASCADE;
-CREATE TABLE poll_choices
+DROP TABLE IF EXISTS poll_options CASCADE;
+CREATE TABLE poll_options
 (
   id                      SERIAL PRIMARY KEY                              NOT NULL,
   poll_id                 INTEGER REFERENCES polls (id) ON DELETE CASCADE NOT NULL,
