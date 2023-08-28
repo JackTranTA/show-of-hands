@@ -6,5 +6,6 @@ CREATE TABLE polls
   title       VARCHAR(255)                  NOT NULL,
   created_at  TIMESTAMP                     NOT NULL,
   expired_at  TIMESTAMP,
-  visit_count INTEGER DEFAULT 0
+  visit_count INTEGER DEFAULT 0,
+  allow_anonymous BOOLEAN DEFAULT FALSE
 );
