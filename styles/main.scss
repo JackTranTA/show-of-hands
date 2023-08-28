@@ -1,18 +1,85 @@
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+@import "mixins";
+.logo {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 60px;
+  z-index: 1;
+  background-color: lightgreen;
+}
+.header-img {
+  margin-top: 60px;
+  width: 100%;
+  height: 250px;
+  background-color: lightblue;
+}
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-      227deg,
-      rgba(163, 208, 219, 1) 0%,
-      rgba(163, 176, 219, 1) 20%,
-      rgba(163, 173, 219, 1) 34%,
-      rgba(163, 219, 208, 1) 59%,
-      rgba(163, 208, 219, 1) 74%,
-      rgba(163, 208, 219, 1) 100%
-  );
+.content-container {
+  margin: 0 15%;
+  @include flexbox($direction: column, $justify: center, $align: center);
+
+  .intro-container {
+    margin-bottom: 6rem;
+    @include flexbox($direction: row, $justify: space-between, $align: stretch);
+
+
+    .intro {
+      max-width: 50%;
+      padding-top: 2rem;
+      @include flexbox($direction: column, $justify: space-between, $align: flex-start);
+    }
+
+    .get-started-container {
+      min-width: 35%;
+      padding-top: 2rem;
+
+      .form-content {
+        @include flexbox($direction: column, $justify: center, $align: stretch);
+        row-gap: 1rem;
+      }
+    }
+  }
+
+  .feature-container {
+    @include flexbox($direction: column, $justify: space-between, $align: flex-start);
+    row-gap: 2rem;
+    margin-bottom: 4rem;
+    width: 60%;
+    .feature-title {
+      align-self: center;
+    }
+
+    .feature-content {
+      @include flexbox($direction: row, $justify: space-between, $align: center);
+      column-gap: 4rem;
+
+      .feature-icon{
+        width: 60px;
+
+      }
+
+      .feature {
+        @include flexbox($direction: column, $justify: flex-start, $align: flex-start);
+        row-gap: 1rem;
+      }
+    }
+  }
+
+  .instruction-container {
+    @include flexbox($direction: column, $justify: space-between, $align: flex-start);
+    row-gap: 2rem;
+    margin-bottom: 4rem;
+    width: 65%;
+
+    .instruction-title {
+      align-self: center;
+    }
+
+    .instruction-content {
+      @include flexbox($direction: column, $justify: space-around, $align: flex-start);
+      row-gap: 2rem;
+      padding-left: 2rem;
+    }
+  }
 }
