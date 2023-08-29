@@ -26,7 +26,7 @@ const getVoterLinkById = (id) => {
   return db.query(queryString, [id])
   .then(data => {
     console.log(data.rows[0]); //hard coded voter link
-    return `localhost:8080${data.rows[0]['voter_identifier']}`;
+    return `localhost:8080/voters/${data.rows[0]['voter_identifier']}`;
   })
   .catch(e => {
     return console.error('query error', e.stack);
