@@ -2,11 +2,11 @@ const db = require('../connection');
 
 const addAdmin = (admin) => {
   const queryString = `
-    INSERT INTO users (email, name, is_admin)
-    VALUES ($1, $2, $3)
+    INSERT INTO admins (email, name)
+    VALUES ($1, $2)
     RETURNING *
   `;
-  return db.query(queryString, [admin.email, admin.name, true])
+  return db.query(queryString, [admin.email, admin.name])
   .then(res => {
     console.log(res.rows[0]);
     return res.rows[0];

@@ -1,7 +1,13 @@
 
 const express = require('express');
 const router  = express.Router();
-const admins = require("../db/queries/admins");
+const admins = require("../db/queries/index-queries");
+
+
+router.get('/', (req, res) => {
+  res.render('index');
+});
+
 
 router.post('/', (req, res) => {
   const admin = req.body;
@@ -10,7 +16,7 @@ router.post('/', (req, res) => {
     if (!admin) {
       return res.send({error: "error"});
     }
-
+    // res.redirect('/poll');
     req.session.adminId = admin.id;
   })
   .catch(e => {
