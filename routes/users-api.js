@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const userQueries = require('../db/queries/poll-results');
 
 router.get('/', (req, res) => {
   userQueries.getUsers()

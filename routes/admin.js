@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
     if (!admin) {
       return res.send({error: "error"});
     }
-
+    res.redirect('/poll');
     req.session.adminId = admin.id;
   })
   .catch(e => {
