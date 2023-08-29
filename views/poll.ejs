@@ -1,0 +1,76 @@
+<%- include('partials/header') %>
+
+<link rel="stylesheet" href="/styles/main.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script defer src="/scripts/poll.js"></script>
+<script defer src="/scripts/helpers/getCurrentDateAndTime.js"></script>
+</head>
+
+<body>
+
+<header>
+  <h1 class="">Show of Hands Logo</h1>
+</header>
+
+<div class="content-container">
+  <section class="poll-container">
+    <form action="/poll/" method="POST" class="form-content needs-validation" novalidate>
+      <div class="form-floating">
+        <input type="text" placeholder="Poll title" id="poll-title" name="poll-title" class="form-control" required>
+        <label for="poll-title">Poll title</label>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter the poll title!
+        </div>
+      </div>
+      <div class="form-floating">
+        <input type="text" placeholder="Poll description" id="poll-description" name="poll-description" class="form-control">
+        <label for="poll-description">Poll description</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="datetime-local"
+          id="poll-end"
+          name="poll-end"
+          value="getCurrentDateAndTime()"
+          min="getCurrentDateAndTime()"
+        />
+        <label for="poll-end">Poll period end date</label>
+      </div>
+      <div>
+        <input type="checkbox" id="anon" name="anon">
+        <label for="anon">Allow participants to stay anonymous</label><br>
+        <input type="checkbox" id="public" name="public">
+        <label for="vehicle2">Send participants results after polling</label><br>
+      </div>
+      <section class="candidate-container">
+        <article>
+          <div class="form-floating">
+          <input type="text" placeholder="Candidate title" id="candidate-title" name="candidate-title" class="form-control" required>
+          <label for="candidate-title">Candidate title</label>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter the candidate title!
+          </div>
+          <div class="form-floating">
+            <input type="text" placeholder="Candidate description" id="candidate-description" name="candidate-description" class="form-control">
+            <label for="candidate-description">Candidate description</label>
+          </div>
+        </article>
+        <div>
+          <button type="button" onclick="addCandidate()" class="btn btn-primary">Add candidate</button>
+        </div>
+      </section>
+      <div>
+        <button type="submit" class="btn btn-primary">Create poll</button>
+      </div>
+    </form>
+  </section>
+
+</div>
+
+<%- include('partials/footer') %>
