@@ -1,9 +1,9 @@
 const db = require('../connection');
 
-const addAdmin = (admin) => {
+const addPoll = (poll) => {
   const queryString = `
-    INSERT INTO admins (email, name)
-    VALUES ($1, $2)
+    INSERT INTO polls (title, description, created_at, expired_at)
+    VALUES ($1, $2, $3, $4)
     RETURNING *
   `;
   return db.query(queryString, [admin.email, admin.name])
