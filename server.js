@@ -37,6 +37,7 @@ app.use(cookieSession({
 
 const indexRoutes = require('./routes/index-routes');
 const adminsRoute = require('./routes/admin-routes');
+const votersRoute = require('./routes/voter-routes');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -44,6 +45,7 @@ const adminsRoute = require('./routes/admin-routes');
 
 app.use('/', indexRoutes);
 app.use('/admins', adminsRoute);
+app.use('/voters', votersRoute);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
