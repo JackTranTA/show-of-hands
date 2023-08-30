@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<link rel="stylesheet" href="/styles/voter-link.css"/>
+<script>
+  const pollDetails = <%- JSON.stringify(poll_details) %>;
+</script>
+<script defer src="/scripts/voter-link.js"></script>
+</head>
+
+<body>
+<header class="logo">
+  <h2 class="">Show of Hands Logo</h2>
+</header>
+
+<div class="body-container">
+
+  <div class="welcome-message">
+    <p> Welcome to poll <%= poll_details['title']%> created by <%= poll_details['creator_name']%>!
+
+      We're excited to have you here. Your input is invaluable to us. Please take a few moments to cast your votes on the questions below.
+
+      Happy Voting!</p>
+  </div>
+  <div class="get-started-container">
+    <form action="/" method="POST" class="form-content needs-validation" novalidate>
+      <div class="form-floating">
+        <input type="text" placeholder="Your name" id="name" name="name" class="form-control" required>
+        <label for="name">Name</label>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter your name!
+        </div>
+      </div>
+      <div class="form-floating">
+        <input type="email" placeholder="Your email" id="email" name="email" class="form-control" required>
+        <label for="email">Email</label>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter your email!
+        </div>
+      </div>
+      <div class="">
+        <button type="submit" class="btn btn-primary">Get Started</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<%- include('partials/footer') %>
