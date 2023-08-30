@@ -7,7 +7,7 @@
 </script>
 
 <script defer>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     let labels = [];
     let values = [];
     let colors = [];
@@ -15,7 +15,7 @@
     function generateColor() {
       const hex = '0123456789ABCDEF'.split('');
       let color = '#';
-      for (let i = 0; i < 6; i++ ) {
+      for (let i = 0; i < 6; i++) {
         color += hex[Math.floor(Math.random() * 16)];
       }
       return color;
@@ -81,11 +81,30 @@
         <i class="fa-regular fa-clipboard"></i>
       </button>
     </div>
+    <div class="copy-message"></div>
   </div>
 
   <div class="chart-container">
     <h3>Poll Results</h3>
     <canvas id="barChart"></canvas>
+  </div>
+
+  <div class="poll-detail-container">
+    <h3>Vote Details</h3>
+    <% for (const voteDetail of voteDetails) { %>
+      <div class="poll-detail pt-2">
+        <h4>
+          <%= voteDetail['voter_name'] %>
+          's Preference</h4>
+        <div class="poll-selection">
+          <% for (let x = 0; x < voteDetail['selected_options_titles'].length; x++) { %>
+            <p><%= voteDetail['selected_options_titles'][x] %> received
+              <span><%= voteDetail['scores'][x] %> points</span>
+            </p>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
   </div>
 
 
