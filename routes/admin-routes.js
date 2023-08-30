@@ -1,28 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const adminRoutes = require("../db/queries/admin-queries");
+const adminsRoute = require("../db/queries/admin-queries");
 
 
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
   let poll_id, result, voterUrl, voteDetail;
-  adminRoutes.getPollIdByIdentifier(identifier)
+  adminsRoute.getPollIdByIdentifier(identifier)
   .then(id => {
       console.log('return id object', id.id);
       poll_id = id.id;
       console.log('id', poll_id);
-      return adminRoutes.getPollResultsById(poll_id);
+      return adminsRoute.getPollResultsById(poll_id);
     }
   )
   .then(results => {
     result = results;
     console.log('results', result);
-    return adminRoutes.getVoterLinkById(poll_id);
+    return adminsRoute.getVoterLinkById(poll_id);
   })
   .then(url => {
     voterUrl = url;
     console.log('url', url);
-    return adminRoutes.getVotesDetailById(poll_id);
+    return adminsRoute.getVotesDetailById(poll_id);
   })
   .then(detail => {
     voteDetail = detail;
