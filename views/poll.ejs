@@ -1,9 +1,9 @@
 <%- include('partials/header') %>
+<link rel="stylesheet" href="/styles/main.css"/>
 
 <link rel="stylesheet" href="/styles/main.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script defer type="text/javascript" src="/scripts/poll.js"></script>
-<script defer type="text/javascript" src="/scripts/helpers/getCurrentDateAndTime.js"></script>
 </head>
 
 <body>
@@ -16,8 +16,8 @@
   <section class="poll-container">
     <form action="/poll/" method="POST" class="form-content needs-validation" novalidate>
       <div class="form-floating">
-        <input type="text" placeholder="Poll title" id="poll-title" name="poll-title" class="form-control" required>
-        <label for="poll-title">Poll title</label>
+        <input type="text" placeholder="Poll title" id="title" name="title" class="form-control" required>
+        <label for="title">Poll title</label>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -28,22 +28,20 @@
       <div class="form-floating">
         <input
           type="datetime-local"
-          id="poll-end"
-          name="poll-end"
+          id="end"
+          name="end"
         />
-        <label for="poll-end">Poll period end date</label>
+        <label for="end">Poll period end date</label>
       </div>
-      <div>
-        <input type="checkbox" id="anon" name="anon">
-        <label for="anon">Allow participants to stay anonymous</label><br>
+      <div class="form-floating">
         <input type="checkbox" id="public" name="public">
         <label for="vehicle2">Send participants results after polling</label><br>
       </div>
       <section class="candidate-container">
         <article>
           <div class="form-floating">
-            <input type="text" placeholder="Candidate title" name="candidate-title" class="form-control" required>
-            <label for="candidate-title">Candidate title</label>
+            <input type="text" placeholder="Candidate title" name="candidate-title-0" class="form-control" required>
+            <label for="candidate-title-0">Candidate title</label>
             <div class="valid-feedback">
               Looks good!
             </div>
@@ -52,8 +50,8 @@
             </div>
           </div>
           <div class="form-floating">
-            <input type="text" placeholder="Candidate description" name="candidate-description" class="form-control">
-            <label for="candidate-description">Candidate description</label>
+            <input type="text" placeholder="Candidate description" name="candidate-description-0" class="form-control">
+            <label for="candidate-description-0">Candidate description</label>
           </div>
         </article>
         <div>
