@@ -1,69 +1,13 @@
 <%- include('partials/header') %>
 
 <link rel="stylesheet" href="/styles/admin-link.css"/>
+<script> const results = <%- JSON.stringify(results) %>; </script>
 <script defer src="/scripts/admin-link.js"></script>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" defer>
 </script>
 
-<script defer>
-  document.addEventListener('DOMContentLoaded', function () {
-    let labels = [];
-    let values = [];
-    let colors = [];
 
-    function generateColor() {
-      const hex = '0123456789ABCDEF'.split('');
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += hex[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-
-    const results = JSON.parse('<%- JSON.stringify(results) %>');
-
-    for (const result of results) {
-      labels.push(result['option_title']);
-      values.push(result['sum']);
-    }
-
-    for (let i = 0; i < labels.length; i++) {
-      colors.push(generateColor());
-    }
-    console.log(labels);
-    console.log(values);
-    console.log(colors);
-
-
-    new Chart('barChart', {
-      type: 'horizontalBar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Points Received',
-          data: values,
-          backgroundColor: colors
-        }]
-      },
-      options: {
-        legend: {
-          labels: {
-            fontSize: 16
-          }
-        },
-        scales: {
-          xAxes: [{
-            ticks: {
-              beginAtZero: true,
-              stepSize: 1
-            }
-          }]
-        }
-      }
-    });
-  });
-</script>
 </head>
 
 <body>
@@ -102,6 +46,13 @@
               <span><%= voteDetail['scores'][x] %> points</span>
             </p>
           <% } %>
+        </div>
+        <div class="vote-comments">
+          <% if (voteDetail['comments'] === null) {%>
+            <p>Comments: no comment</p>
+          <% } else { %>
+            <p><%= voteDetail['comments']%></p>
+          <% }%>
         </div>
       </div>
     <% } %>
