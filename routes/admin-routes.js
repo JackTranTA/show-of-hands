@@ -2,7 +2,6 @@ const express = require('express');
 const router  = express.Router();
 const adminRoutes = require("../db/queries/admin-queries");
 
-
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
   let poll_id, result, voterUrl, visitCount, voteDetail;
@@ -45,8 +44,5 @@ router.get('/:identifier', (req, res) => {
   });
 
 })
-
-
-
 
 module.exports = router;
