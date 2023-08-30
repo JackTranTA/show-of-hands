@@ -17,7 +17,7 @@ const addPoll = (poll, adminId, currentTime, pollEnd, public, adminUrl, voterUrl
 
 const addCandidate = (pollId, title, description) => {
   const queryString = `
-    INSERT INTO poll_options (poll_id, option_title, option_description)
+    INSERT INTO poll_options (poll_id, title, description)
     VALUES ($1, $2, $3)
     RETURNING *
   `;
