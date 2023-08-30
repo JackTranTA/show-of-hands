@@ -1,12 +1,12 @@
 const db = require('../connection');
 
-const addPoll = (poll) => {
+const addPoll = (poll, adminId, currentTime, pollEnd, public, adminUrl, voterUrl) => {
   const queryString = `
-    INSERT INTO polls (title, description, created_at, expired_at)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO polls (admin_id, title, created_at, expired_at, send_result, admin_identifier, voter_identifier)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *
   `;
-  return db.query(queryString, [admin.email, admin.name])
+  return db.query(queryString, [adminId, poll.title, currentTime, pollEnd, public, adminUrl, voterUrl])
   .then(res => {
     return res.rows[0];
   })
@@ -15,4 +15,19 @@ const addPoll = (poll) => {
   });
 };
 
-module.exports = {addAdmin};
+const addCandidate = (pollId, title, description) => {
+  const queryString = `
+    INSERT INTO poll_options (poll_id, option_title, option_description)
+    VALUES ($1, $2, $3)
+    RETURNING *
+  `;
+  return db.query(queryString, [pollId, title, description])
+  .then(res => {
+    return res.rows[0];
+  })
+  .catch(err => {
+    return console.error('query error', err.stack);
+  });
+};
+
+module.exports = { addPoll, addCandidate };
