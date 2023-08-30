@@ -1,22 +1,13 @@
 function getCurrentDateAndTime() {
-  const dateTime = new Date();
+  const dateTime = new Date().toJSON().slice(0,19);
   return dateTime.toLocaleString();
 }
 
-const generateRandomString = () => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let string = '';
-  for (let i = 0; i < 6; i++) {
-    string += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return string;
-};
-
-const addCandidate = function() {
+const addCandidate = function(count) {
   let $candidate = `<article>
           <div class="form-floating">
-            <input type="text" placeholder="Candidate title" name="candidate-title" class="form-control" required>
-            <label for="candidate-title">Candidate title</label>
+            <input type="text" placeholder="Candidate title" name="candidate-title-${count}" class="form-control" required>
+            <label for="candidate-title-${count}">Candidate title</label>
             <div class="valid-feedback">
               Looks good!
             </div>
@@ -25,20 +16,21 @@ const addCandidate = function() {
             </div>
           </div>
           <div class="form-floating">
-            <input type="text" placeholder="Candidate description" name="candidate-description" class="form-control">
-            <label for="candidate-description">Candidate description</label>
+            <input type="text" placeholder="Candidate description" name="candidate-description-${count}" class="form-control">
+            <label for="candidate-description-${count}">Candidate description</label>
           </div>
         </article>`
   return $candidate;
 }
 
 $(document).ready(function() {
-  console.log(getCurrentDateAndTime());
+  let count = 0;
   $("#poll-end").attr({
     "min" : getCurrentDateAndTime()
   });
 
   $("#add-candidate").click(function(){
-    $("article").last().append(addCandidate());
+    count++;
+    $("article").last().append(addCandidate(count));
   })
 });
