@@ -29,7 +29,8 @@ router.get('/:identifier', (req, res) => {
     console.log('vote detail', voteDetail);
     res.render('poll-results', {
       results: result,
-      url: voterUrl
+      url: voterUrl,
+      voteDetails: voteDetail
     });
   })
   .catch(err => {
