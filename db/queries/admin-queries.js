@@ -38,7 +38,7 @@ const getPollResultsById = (id) => {
     SELECT option_title, SUM(score)
     FROM poll_selections
            JOIN poll_options ON poll_option_id = poll_options.id
-    WHERE poll_selections.poll_id = $1
+    WHERE poll_options.poll_id = $1
     GROUP BY option_title;
   `;
 
@@ -51,29 +51,19 @@ const getPollResultsById = (id) => {
   });
 };
 
-const getVisitCountById = (id) => {
-  const queryString = `
-    SELECT visit_count
-    FROM polls
-    WHERE id = $1;
-  `;
-  return db.query(queryString, [id])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
-};
-
 const getVotesDetailById = (id) => {
   const queryString = `
-    SELECT voter_id,
-           ARRAY_AGG(poll_option_id) AS selected_options,
-           ARRAY_AGG(score)          AS scores
+    SELECT voters.name                          AS voter_name,
+           voters.id                            AS voter_id,
+           voters.poll_id,
+           comments,
+           ARRAY_AGG(poll_options.option_title) AS selected_options_titles,
+           ARRAY_AGG(score)                     AS scores
     FROM poll_selections
-    WHERE poll_id = $1
-    GROUP BY voter_id
+           JOIN voters ON poll_selections.voter_id = voters.id
+           JOIN poll_options ON poll_selections.poll_option_id = poll_options.id
+    WHERE voters.poll_id = $1
+    GROUP BY voters.id, voters.poll_id, comments
     ORDER BY voter_id;
   `;
   return db.query(queryString, [id])
@@ -87,4 +77,4 @@ const getVotesDetailById = (id) => {
 
 
 
-module.exports = {getPollIdByIdentifier, getVoterLinkById: getVoterLinkById, getVisitCountById, getPollResultsById, getVotesDetailById};
+module.exports = {getPollIdByIdentifier, getVoterLinkById: getVoterLinkById, getPollResultsById, getVotesDetailById};

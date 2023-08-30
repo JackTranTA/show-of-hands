@@ -1,12 +1,12 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const adminRoutes = require("../db/queries/admin-queries");
 
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
-  let poll_id, result, voterUrl, visitCount, voteDetail;
+  let poll_id, result, voterUrl, voteDetail;
   adminRoutes.getPollIdByIdentifier(identifier)
-  .then( id => {
+  .then(id => {
       console.log('return id object', id.id);
       poll_id = id.id;
       console.log('id', poll_id);
@@ -21,11 +21,6 @@ router.get('/:identifier', (req, res) => {
   .then(url => {
     voterUrl = url;
     console.log('url', url);
-    return adminRoutes.getVisitCountById(poll_id);
-  })
-  .then(count => {
-    visitCount = count;
-    console.log('visitCount', visitCount);
     return adminRoutes.getVotesDetailById(poll_id);
   })
   .then(detail => {
@@ -34,15 +29,16 @@ router.get('/:identifier', (req, res) => {
     res.render('poll-results', {
       results: result,
       url: voterUrl,
-      visitCount: visitCount,
+      voteDetails: voteDetail
     });
   })
   .catch(err => {
     res
     .status(500)
-    .json({ error: err.message });
+    .json({error: err.message});
   });
 
-})
+});
+
 
 module.exports = router;

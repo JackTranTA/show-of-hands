@@ -2,8 +2,8 @@
 
 <link rel="stylesheet" href="/styles/main.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script defer src="/scripts/poll.js"></script>
-<script defer src="/scripts/helpers/getCurrentDateAndTime.js"></script>
+<script defer type="text/javascript" src="/scripts/poll.js"></script>
+<script defer type="text/javascript" src="/scripts/helpers/getCurrentDateAndTime.js"></script>
 </head>
 
 <body>
@@ -26,16 +26,10 @@
         </div>
       </div>
       <div class="form-floating">
-        <input type="text" placeholder="Poll description" id="poll-description" name="poll-description" class="form-control">
-        <label for="poll-description">Poll description</label>
-      </div>
-      <div class="form-floating">
         <input
           type="datetime-local"
           id="poll-end"
           name="poll-end"
-          value="getCurrentDateAndTime()"
-          min="getCurrentDateAndTime()"
         />
         <label for="poll-end">Poll period end date</label>
       </div>
@@ -48,21 +42,22 @@
       <section class="candidate-container">
         <article>
           <div class="form-floating">
-          <input type="text" placeholder="Candidate title" id="candidate-title" name="candidate-title" class="form-control" required>
-          <label for="candidate-title">Candidate title</label>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-          <div class="invalid-feedback">
-            Please enter the candidate title!
+            <input type="text" placeholder="Candidate title" name="candidate-title" class="form-control" required>
+            <label for="candidate-title">Candidate title</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter the candidate title!
+            </div>
           </div>
           <div class="form-floating">
-            <input type="text" placeholder="Candidate description" id="candidate-description" name="candidate-description" class="form-control">
+            <input type="text" placeholder="Candidate description" name="candidate-description" class="form-control">
             <label for="candidate-description">Candidate description</label>
           </div>
         </article>
         <div>
-          <button type="button" onclick="addCandidate()" class="btn btn-primary">Add candidate</button>
+          <button type="button" id="add-candidate" class="btn btn-primary">Add candidate</button>
         </div>
       </section>
       <div>
