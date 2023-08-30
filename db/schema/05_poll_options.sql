@@ -3,6 +3,6 @@ CREATE TABLE poll_options
 (
   id                 SERIAL PRIMARY KEY                              NOT NULL,
   poll_id            INTEGER REFERENCES polls (id) ON DELETE CASCADE NOT NULL,
-  option_title       VARCHAR(255)                                    NOT NULL,
-  option_description TEXT
+  title       VARCHAR(255)                                    NOT NULL,
+  description TEXT
 );

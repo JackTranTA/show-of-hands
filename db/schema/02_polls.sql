@@ -6,7 +6,6 @@ CREATE TABLE polls
   title            VARCHAR(255)                   NOT NULL,
   created_at       TIMESTAMP                      NOT NULL,
   expired_at       TIMESTAMP,
-  allow_anonymous  BOOLEAN DEFAULT FALSE,
   send_result      BOOLEAN DEFAULT FALSE,
   admin_identifier VARCHAR(50)                    NOT NULL,
   voter_identifier VARCHAR(50)                    NOT NULL

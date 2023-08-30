@@ -8,7 +8,6 @@ const addAdmin = (admin) => {
   `;
   return db.query(queryString, [admin.email, admin.name])
   .then(res => {
-    console.log(res.rows[0]);
     return res.rows[0];
   })
   .catch(err => {
