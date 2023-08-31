@@ -91,15 +91,15 @@
 
   <div class="poll-detail-container">
     <h3>Vote Details</h3>
-    <% for (const voteDetail in voteDetails) { %>
+    <% for (const voteDetail of voteDetails) { %>
       <div class="poll-detail pt-2">
         <h4>
-          <%= voteDetails[key]['voter_name'] %>
+          <%= voteDetail['voter_name'] %>
           's Preference</h4>
         <div class="poll-selection">
-          <% for (let x = 0; x < voteDetails[key]['selected_options_titles'].length; x++) { %>
-            <p><%= voteDetails[key]['selected_options_titles'][x] %> received
-              <span><%= voteDetails[key]['scores'][x] %> points</span>
+          <% for (let x = 0; x < voteDetail['selected_options_titles'].length; x++) { %>
+            <p><%= voteDetail['selected_options_titles'][x] %> received
+              <span><%= voteDetail['scores'][x] %> points</span>
             </p>
           <% } %>
         </div>
