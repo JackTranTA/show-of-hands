@@ -7,8 +7,8 @@ const addCandidate = function(count) {
 
   let $candidate = `<div class="row mb-3">
       <div class="form-group col-6 mx-auto">
-        <label for="candidate-title-0">Candidate title</label>
-        <input type="text" name="candidate-title-0" class="form-control form-control-lg" required>
+        <label for="candidate-title-${count}">Candidate title</label>
+        <input type="text" name="candidate-title-${count}" class="form-control form-control-lg" required>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -20,8 +20,8 @@ const addCandidate = function(count) {
 
     <div class="row mb-3">
       <div class="form-group col-6 mx-auto">
-        <label for="candidate-description-0">Candidate description</label>
-        <input type="text" name="candidate-description-0" class="form-control form-control-lg">
+        <label for="candidate-description-${count}">Candidate description</label>
+        <input type="text" name="candidate-description-${count}" class="form-control form-control-lg">
       </div>
     </div>`;
 

@@ -4,7 +4,7 @@ const adminRoutes = require("../db/queries/admin-queries");
 
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
-  let poll_id, result, voterUrl, voteDetail;
+  let poll_id, result, voterUrl, voteOptions, voteDetail;
   adminRoutes.getPollIdByIdentifier(identifier)
   .then(poll => {
       console.log('return poll object', poll.id);
