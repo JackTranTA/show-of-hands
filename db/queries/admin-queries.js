@@ -34,11 +34,11 @@ const getVoterLinkById = (id) => {
 
 const getPollResultsById = (id) => {
   const queryString = `
-    SELECT option_title, SUM(score)
+    SELECT title, SUM(score)
     FROM poll_selections
            JOIN poll_options ON poll_option_id = poll_options.id
     WHERE poll_options.poll_id = $1
-    GROUP BY option_title;
+    GROUP BY title;
   `;
 
   return db.query(queryString, [id])
@@ -56,7 +56,7 @@ const getVotesDetailById = (id) => {
            voters.id                            AS voter_id,
            voters.poll_id,
            comments,
-           ARRAY_AGG(poll_options.option_title) AS selected_options_titles,
+           ARRAY_AGG(poll_options.title) AS selected_options_titles,
            ARRAY_AGG(score)                     AS scores
     FROM poll_selections
            JOIN voters ON poll_selections.voter_id = voters.id

@@ -1,10 +1,13 @@
 const db = require('../connection');
 
 const getPollByIdentifier = (identifier) => {
-  const queryString = `
-    SELECT id, title
+  const queryString =`
+    SELECT admins.name AS creator_name, polls.title, send_result, ARRAY_AGG(poll_options.title) AS titles, ARRAY_AGG(poll_options.description) AS descriptions
     FROM polls
-    WHERE voter_identifier = $1;
+    JOIN poll_options ON polls.id = poll_id
+    JOIN admins ON polls.admin_id = admins.id
+    WHERE polls.voter_identifier = $1
+    GROUP BY creator_name, polls.title, send_result;
   `;
   return db.query(queryString, [identifier])
   .then(data => {
@@ -16,20 +19,4 @@ const getPollByIdentifier = (identifier) => {
   });
 }
 
-const getPollCandidates = (pollId) => {
-  const queryString = `
-    SELECT *
-    FROM poll_options
-    WHERE poll_id = $1;
-  `;
-  return db.query(queryString, [pollId])
-  .then(data => {
-    console.log(data.rows);
-    return data.rows;
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
-}
-
-module.exports = { getPollByIdentifier, getPollCandidates };
+module.exports = { getPollByIdentifier };
