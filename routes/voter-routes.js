@@ -4,22 +4,23 @@ const voterRoutes = require("../db/queries/voter-queries");
 
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
-  let poll_id, poll_title, candidate;
+  const candidates = [];
+  let creator_name, poll_title, public, candidate_titles, candidate_descriptions;
   voterRoutes.getPollByIdentifier(identifier)
   .then(poll => {
-      console.log('return id object', poll);
-      poll_id = poll.id;
-      poll_title = poll.title;
-      console.log('id', poll_id);
-      console.log('title', poll_title);
-      return voterRoutes.getPollCandidates(poll_id);
-  })
-  .then(candidates => {
-    candidate = candidates;
-    console.log('candidates object', candidates);
+    console.log('return poll object', poll);
+    creator_name = poll.creator_name;
+    poll_title = poll.title;
+    public = poll.send_result;
+    candidate_titles = poll.titles;
+    candidate_descriptions = poll.descriptions;
+    candidates.push(candidate_titles);
+    candidates.push(candidate_descriptions);
     res.render('voter', {
+      creator: creator_name,
       title: poll_title,
-      candidates: candidate
+      public: public,
+      candidates: candidates,
     });
   })
   .catch(err => {
