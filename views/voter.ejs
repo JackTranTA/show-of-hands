@@ -48,9 +48,11 @@
           <divclass="form-floating">
             <%= candidates[0][x] %>
           </div>
-          <div>
-            <button type="button" id="show-description" class="btn btn-primary">Description</button>
-          </div>
+          <% if ( candidates[1][x] !== null ) { %>
+            <div>
+              <button type="button" id="show-description" class="btn btn-primary">Description</button>
+            </div>
+          <% } %>
           <div>
             <%= candidates[1][x] %>
           </div>
