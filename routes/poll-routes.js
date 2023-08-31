@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     const candidates = keys.filter((key) => key.includes('candidate-'));
     for (let i = 0; i < candidates.length/2; i++) {
       const candidate = keys.filter((key) => key.includes('-' + i));
-      console.log("candidate", poll[candidate[0]], poll[candidate[0]]);
+      console.log("candidate", poll[candidate[0]], poll[candidate[1]]);
       pollRoutes.addCandidate(polls.id, poll[candidate[0]], poll[candidate[1]]);
     }
     res.redirect('/');

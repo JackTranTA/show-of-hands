@@ -4,6 +4,7 @@ CREATE TABLE polls
   id               SERIAL PRIMARY KEY             NOT NULL,
   admin_id         INTEGER REFERENCES admins (id) NOT NULL,
   title            VARCHAR(255)                   NOT NULL,
+  description      TEXT,
   created_at       TIMESTAMP                      NOT NULL,
   expired_at       TIMESTAMP,
   send_result      BOOLEAN DEFAULT FALSE,
