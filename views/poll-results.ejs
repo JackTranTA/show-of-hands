@@ -24,7 +24,7 @@
     const results = JSON.parse('<%- JSON.stringify(results) %>');
 
     for (const result of results) {
-      labels.push(result['option_title']);
+      labels.push(result['title']);
       values.push(result['sum']);
     }
 

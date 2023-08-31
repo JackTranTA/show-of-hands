@@ -1,21 +1,22 @@
 <%- include('partials/header') %>
-<link rel="stylesheet" href="/styles/main.css"/>
+<link rel="stylesheet" href="/styles/poll.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script defer type="text/javascript" src="/scripts/poll.js"></script>
 </head>
 
 <body>
 
-<header>
+<header class="logo">
   <h1 class="">Show of Hands Logo</h1>
 </header>
 
-<div class="content-container">
-  <section class="poll-container">
-    <form action="/poll/" method="POST" class="form-content needs-validation">
-      <div class="form-floating">
-        <input type="text" placeholder="Poll title" id="title" name="title" class="form-control" required>
-        <label for="title">Poll title</label>
+<section class="poll-container container-sm pt-5">
+  <form action="/poll/" method="POST" class="form-content needs-validation" novalidate>
+    <h3 class="row d-flex justify-content-center mb-5">Create a poll</h3>
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <label for="title" class="form-label">Poll title</label>
+        <input type="text" id="title" name="title" class="form-control form-control-lg" required>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -23,45 +24,94 @@
           Please enter the poll title!
         </div>
       </div>
-      <div class="form-floating">
-        <input
-          type="datetime-local"
-          id="end"
-          name="end"
-        />
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <label for="description" class="form-label">Poll description</label>
+        <textarea type="text" id="description" name="description" class="form-control form-control-lg"></textarea>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="form-group col-6 mx-auto">
         <label for="end">Poll period end date</label>
+        <input type="datetime-local" id="end" name="end" class="form-control form-control-lg" required/>
       </div>
-      <div class="form-floating">
-        <input type="checkbox" id="public" name="public">
-        <label for="vehicle2">Send participants results after polling</label><br>
+    </div>
+
+    <div class="row mb-3">
+      <div class="form-group col-6 mx-auto">
+        <input type="checkbox" id="public" name="public" class="form-check-input">
+        <label for="public" class="form-check-label">Send participants results after polling</label>
       </div>
-      <section class="candidate-container">
-        <article>
-          <div class="form-floating">
-            <input type="text" placeholder="Candidate title" name="candidate-title-0" class="form-control" required>
-            <label for="candidate-title-0">Candidate title</label>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-            <div class="invalid-feedback">
-              Please enter the candidate title!
-            </div>
+    </div>
+
+    <div class="row mb-3 candidate">
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-title-0">Candidate title</label>
+          <input type="text" name="candidate-title-0" class="form-control form-control-lg" required>
+          <div class="valid-feedback">
+            Looks good!
           </div>
-          <div class="form-floating">
-            <input type="text" placeholder="Candidate description" name="candidate-description-0" class="form-control">
-            <label for="candidate-description-0">Candidate description</label>
+          <div class="invalid-feedback">
+            Please enter the candidate title!
           </div>
-        </article>
-        <div>
-          <button type="button" id="add-candidate" class="btn btn-primary">Add candidate</button>
         </div>
-      </section>
-      <div>
+      </div>
+
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-description-0">Candidate description</label>
+          <input type="text" name="candidate-description-0" class="form-control form-control-lg">
+        </div>
+      </div>
+
+      <hr class="col-6 mx-auto">
+    </div>
+
+    <div class="row mb-3 candidate">
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-title-1">Candidate title</label>
+          <input type="text" name="candidate-title-1" class="form-control form-control-lg" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter the candidate title!
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-description-1">Candidate description</label>
+          <input type="text" name="candidate-description-1" class="form-control form-control-lg">
+        </div>
+      </div>
+
+      <hr class="col-6 mx-auto">
+    </div>
+
+
+    <div class="row mb-3 add-candidate-container">
+      <div class="col-3 mx-auto d-flex justify-content-center">
+        <button type="button" id="add-candidate" class="btn btn-primary">Add candidate</button>
+      </div>
+    </div>
+
+
+
+    <div class="row mb-3">
+      <div class="col-3 mx-auto d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">Create poll</button>
       </div>
-    </form>
-  </section>
+    </div>
 
-</div>
+  </form>
+</section>
+
 
 <%- include('partials/footer') %>

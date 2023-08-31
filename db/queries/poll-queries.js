@@ -2,11 +2,11 @@ const db = require('../connection');
 
 const addPoll = (poll, adminId, currentTime, pollEnd, public, adminUrl, voterUrl) => {
   const queryString = `
-    INSERT INTO polls (admin_id, title, created_at, expired_at, send_result, admin_identifier, voter_identifier)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO polls (admin_id, title, description, created_at, expired_at, send_result, admin_identifier, voter_identifier)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *
   `;
-  return db.query(queryString, [adminId, poll.title, currentTime, pollEnd, public, adminUrl, voterUrl])
+  return db.query(queryString, [adminId, poll.title, poll.description, currentTime, pollEnd, public, adminUrl, voterUrl])
   .then(res => {
     return res.rows[0];
   })

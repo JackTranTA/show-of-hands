@@ -35,8 +35,8 @@ const getVoterLinkById = (id) => {
 const getPollResultsById = (id) => {
   const queryString = `
     SELECT title, SUM(score)
-    FROM poll_selections
-           JOIN poll_options ON poll_option_id = poll_options.id
+    FROM poll_options
+           LEFT JOIN poll_selections ON poll_options.id = poll_option_id
     WHERE poll_options.poll_id = $1
     GROUP BY title;
   `;
@@ -67,6 +67,7 @@ const getVotesDetailById = (id) => {
   `;
   return db.query(queryString, [id])
   .then(data => {
+    console.log(data.rows);
     return data.rows;
   })
   .catch(e => {

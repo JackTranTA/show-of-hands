@@ -4,33 +4,64 @@ function getCurrentDateAndTime() {
 }
 
 const addCandidate = function(count) {
-  let $candidate = `<article>
-          <div class="form-floating">
-            <input type="text" placeholder="Candidate title" name="candidate-title-${count}" class="form-control" required>
-            <label for="candidate-title-${count}">Candidate title</label>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-            <div class="invalid-feedback">
-              Please enter the candidate title!
-            </div>
+
+  let $candidate = `
+    <div class="row mb-3 candidate">
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-title-${count}">Candidate title</label>
+          <input type="text" name="candidate-title-${count}" class="form-control form-control-lg" required>
+          <div class="valid-feedback">
+            Looks good!
           </div>
-          <div class="form-floating">
-            <input type="text" placeholder="Candidate description" name="candidate-description-${count}" class="form-control">
-            <label for="candidate-description-${count}">Candidate description</label>
+          <div class="invalid-feedback">
+            Please enter the candidate title!
           </div>
-        </article>`
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-description-${count}">Candidate description</label>
+          <input type="text" name="candidate-description-${count}" class="form-control form-control-lg">
+        </div>
+      </div>
+
+      <div class="mb-3 delete-candidate-container">
+        <div class="col-3 mx-auto d-flex justify-content-center">
+          <button type="button" class="btn btn-primary delete-candidate">Delete candidate</button>
+        </div>
+      </div>
+      <hr class="col-6 mx-auto">
+    </div>`;
+
   return $candidate;
 }
 
 $(document).ready(function() {
-  let count = 0;
+  let count = 1;
   $("#end").attr({
     "min" : getCurrentDateAndTime()
   });
 
-  $("#add-candidate").click(function(){
+  $("#add-candidate").on('click', function(){
     count++;
-    $("article").last().append(addCandidate(count));
-  })
+    $(".add-candidate-container").before(addCandidate(count));
+  });
+
+  $(".poll-container").on('click', '.delete-candidate', function() {
+    let deleteButton = $(this);
+    deleteButton.closest('.candidate').remove();
+  });
+
+  // form validation
+
+  const $form = $('.needs-validation');
+  $form.on('submit', function(event) {
+    if (!this.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    $form.addClass('was-validated');
+  });
 });
