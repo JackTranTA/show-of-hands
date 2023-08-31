@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="/styles/main.css"/>
 <link rel="stylesheet" href="/styles/voter-link.scss"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script defer type="text/javascript" src="/scripts/poll.js"></script>
 </head>
 
 <body>
@@ -13,7 +12,7 @@
 <div class="poll-container">
 
     <div class="welcome-message">
-      <p> Welcome to poll <%= poll_details['title']%> created by <%= poll_details['creator_name']%>!
+      <p> Welcome to poll <%= title %> created by <%= creator %>!
 
       We're excited to have you here. Your input is invaluable to us. Please take a few moments to cast your votes on the questions below.
 
@@ -31,30 +30,32 @@
         Please enter your name!
       </div>
     </div>
-    <div class="form-floating">
-      <input type="email" placeholder="Your email" id="email" name="email" class="form-control" required>
-      <label for="email">Email</label>
-      <div class="valid-feedback">
-        Looks good!
+    <% if (public === true) { %>
+      <div class="form-floating">
+        <input type="email" placeholder="Your email" id="email" name="email" class="form-control" required>
+        <label for="email">Email</label>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter your email!
+        </div>
       </div>
-      <div class="invalid-feedback">
-        Please enter your email!
-      </div>
-    </div>
+    <% } %>
     <section class="candidate-container">
-      <% for (const key in candidates) { %>
+      <% for (let x = 0; x < candidates[0].length; x++) { %>
         <article>
           <divclass="form-floating">
-            <%= candidates[key]['title'] %>
+            <%= candidates[0][x] %>
           </div>
           <div>
             <button type="button" id="show-description" class="btn btn-primary">Description</button>
           </div>
           <div>
-            <%= candidates[key]['description'] %>
+            <%= candidates[1][x] %>
           </div>
-          <label for="rank">Rank:</label>
-          <select name="rank" id="rank">
+          <label for="rank">Rank:</label> 
+          <select name="rank" class="rank">
             <option value="0">0</option>
           </select>
         </article>
