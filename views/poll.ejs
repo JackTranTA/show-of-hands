@@ -1,4 +1,5 @@
 <%- include('partials/header') %>
+<link rel="stylesheet" href="/styles/main.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script defer type="text/javascript" src="/scripts/poll.js"></script>
 </head>
@@ -11,7 +12,7 @@
 
 <div class="content-container">
   <section class="poll-container">
-    <form action="/poll/" method="POST" class="form-content needs-validation" novalidate>
+    <form action="/poll/" method="POST" class="form-content needs-validation">
       <div class="form-floating">
         <input type="text" placeholder="Poll title" id="title" name="title" class="form-control" required>
         <label for="title">Poll title</label>

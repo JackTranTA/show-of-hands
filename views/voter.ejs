@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/styles/main.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script defer type="text/javascript" src="/scripts/poll.js"></script>
+</head>
+
+<body>
+
+<header>
+  <h1 class="">Show of Hands Logo</h1>
+</header>
+
+<div class="poll-container">
+  <h2>Poll Submission</h2>
+  <h4>
+    <%= title %>
+  </h4>
+  <section class="candidate-container">
+    <form action="/voter/" method="POST" class="form-content needs-validation" novalidate>
+      <% for (const key in candidates) { %>
+        <article>
+          <divclass="form-floating">
+            <%= candidates[key]['title'] %>
+          </div>
+          <div>
+            <button type="button" id="show-description" class="btn btn-primary">Description</button>
+          </div>
+          <div>
+            <%= candidates[key]['description'] %>
+          </div>
+        </article>
+      <% } %>
+    </form>
+  </section>
+
+</div>
+
+<%- include('partials/footer') %>
