@@ -10,10 +10,9 @@
   <h1 class="">Show of Hands Logo</h1>
 </header>
 
-
-<section class="poll-container container-sm">
+<section class="poll-container container-sm pt-5">
   <form action="/poll/" method="POST" class="form-content needs-validation" novalidate>
-
+    <h3 class="row d-flex justify-content-center mb-5">Create a poll</h3>
     <div class="row mb-3">
       <div class="col-6 mx-auto">
         <label for="title" class="form-label">Poll title</label>
@@ -48,31 +47,62 @@
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="form-group col-6 mx-auto">
-        <label for="candidate-title-0">Candidate title</label>
-        <input type="text" name="candidate-title-0" class="form-control form-control-lg" required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please enter the candidate title!
+    <div class="row mb-3 candidate">
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-title-0">Candidate title</label>
+          <input type="text" name="candidate-title-0" class="form-control form-control-lg" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter the candidate title!
+          </div>
         </div>
       </div>
+
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-description-0">Candidate description</label>
+          <input type="text" name="candidate-description-0" class="form-control form-control-lg">
+        </div>
+      </div>
+
+      <hr class="col-6 mx-auto">
     </div>
 
-    <div class="row mb-3">
-      <div class="form-group col-6 mx-auto">
-        <label for="candidate-description-0">Candidate description</label>
-        <input type="text" name="candidate-description-0" class="form-control form-control-lg">
+    <div class="row mb-3 candidate">
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-title-1">Candidate title</label>
+          <input type="text" name="candidate-title-1" class="form-control form-control-lg" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter the candidate title!
+          </div>
+        </div>
       </div>
+
+      <div class="mb-3">
+        <div class="form-group col-6 mx-auto">
+          <label for="candidate-description-1">Candidate description</label>
+          <input type="text" name="candidate-description-1" class="form-control form-control-lg">
+        </div>
+      </div>
+
+      <hr class="col-6 mx-auto">
     </div>
+
 
     <div class="row mb-3 add-candidate-container">
       <div class="col-3 mx-auto d-flex justify-content-center">
         <button type="button" id="add-candidate" class="btn btn-primary">Add candidate</button>
       </div>
     </div>
+
+
 
     <div class="row mb-3">
       <div class="col-3 mx-auto d-flex justify-content-center">
