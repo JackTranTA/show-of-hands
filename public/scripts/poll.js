@@ -1,5 +1,5 @@
 function getCurrentDateAndTime() {
-  const dateTime = new Date().toJSON().slice(0,19);
+  const dateTime = new Date().toJSON().slice(0,16);
   return dateTime.toLocaleString();
 }
 
@@ -25,7 +25,7 @@ const addCandidate = function(count) {
 
 $(document).ready(function() {
   let count = 0;
-  $("#poll-end").attr({
+  $("#end").attr({
     "min" : getCurrentDateAndTime()
   });
 

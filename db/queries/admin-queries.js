@@ -14,8 +14,7 @@ const getPollIdByIdentifier = (identifier) => {
   .catch(e => {
     return console.error('query error', e.stack);
   });
-
-}
+};
 
 const getVoterLinkById = (id) => {
   const queryString = `
@@ -31,8 +30,8 @@ const getVoterLinkById = (id) => {
   .catch(e => {
     return console.error('query error', e.stack);
   });
+};
 
-}
 const getPollResultsById = (id) => {
   const queryString = `
     SELECT option_title, SUM(score)
