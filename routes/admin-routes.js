@@ -6,13 +6,12 @@ router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
   let poll_id, result, voterUrl, voteDetail;
   adminRoutes.getPollIdByIdentifier(identifier)
-  .then(id => {
-      console.log('return id object', id.id);
-      poll_id = id.id;
+  .then(poll => {
+      console.log('return poll object', poll.id);
+      poll_id = poll.id;
       console.log('id', poll_id);
       return adminRoutes.getPollResultsById(poll_id);
-    }
-  )
+  })
   .then(results => {
     result = results;
     console.log('results', result);
