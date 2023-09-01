@@ -12,28 +12,27 @@ $(document).ready(function() {
 
   const changeWithRepeats = function (index, newestValue) {
     if (rank.includes(newestValue)) {
-      console.log(rank.indexOf(newestValue));
-      rank[rank.indexOf(newestValue)] = lastFocusValue;
+      const index2 = rank.indexOf(newestValue);
+      rank[index2] = lastFocusValue;
+      const max = $( "select" ).eq(index2).children('option').last().val();
+      if (max < lastFocusValue) {
+        for (let i = Number(max); i <= lastFocusValue; i++) {
+          $( "select" ).eq(index2).append($('<option>', {
+              value: i + 1,
+              text: '' + (Number(i) + 1)
+          }));
+        }
+        console.log(lastFocusValue);
+        for (let i = max; i < lastFocusValue; i++) {
+          console.log(max);
+          $( "select" ).eq(index).children('option').last().remove();
+        }
+      }
     }
-    console.log(index);
     rank[index] = newestValue;
     console.log(rank);
     let i = 0;
     $('select').each(function() {
-      const max = $(this).children('option').last().val();
-      console.log(max);
-      if (max > rank[i]) {
-        for (let j = max; j > rank[i]; j--) {
-          $(this).children('option').last().remove();
-        }
-      } else if (max < rank[i]) {
-        for (let j = max; j < rank[i]; j++) {
-          $(this).append($('<option>', {
-              value: j,
-              text: '' + j
-          }));
-        }
-      }
       $( this ).val(rank[i++]);
     });
   };
@@ -44,12 +43,12 @@ $(document).ready(function() {
   }).focus(function (e) {
     focusState = 1;
     lastFocusValue = $(this).val();
-    for (let i = 1; i < rank.length ; i++) {
-      if (rank.includes('' + i)) {
-        if($(this).find('option[value="' + (i) + '"]').length < 1) {
+    for (let i = 1; i <= rank.length + 1; i++) {
+      if (rank.includes('' + i) && lastFocusValue != i) {
+        if($(this).find('option[value="' + (i + 1) + '"]').length < 1) {
           $(this).append($('<option>', {
-              value: i,
-              text: '' + (i)
+              value: i + 1,
+              text: '' + (i + 1)
           }));
         }
       } else {
@@ -60,9 +59,7 @@ $(document).ready(function() {
     focusState = 0;
   }).change (function () {
     thisIndex = $("select").index($(this));
-    console.log(thisIndex);
     changeWithRepeats(thisIndex, $(this).val());
   });
-
 
 });
