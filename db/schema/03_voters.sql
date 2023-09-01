@@ -5,5 +5,5 @@ CREATE TABLE voters
   poll_id  INTEGER REFERENCES polls (id) ON DELETE CASCADE,
   name     VARCHAR(255) DEFAULT 'anonymous',
   email    VARCHAR(320),
-  comments TEXT
+  comment TEXT
 )
