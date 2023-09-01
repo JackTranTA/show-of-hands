@@ -76,7 +76,6 @@ $(document).ready(function() {
     });
   })
   // form validation
-
   const $form = $('.needs-validation');
   $form.on('submit', function(event) {
     // if (!this.checkValidity()) {
