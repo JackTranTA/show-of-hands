@@ -1,19 +1,18 @@
 const express = require('express');
 const router  = express.Router();
 const voterRoutes = require("../db/queries/voter-queries");
-let poll_id, candidate_ids;
-
+const { getCurrentDateAndTime } = require('../scripts/helpers/getCurrentDateAndTime.js');
+let poll_id, candidate_ids, expired_time;
+let message = "Your poll selections have been submitted successfully!";
 
 router.get('/', (req, res) => {
-  res.render('confirmation');
+  res.render('confirmation', {message: message});
 });
-
-
 
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
   const candidates = [];
-  let creator_name, poll_title, poll_description, public, titles, descriptions;
+  let creator_name, poll_title, poll_description, public, titles, descriptions, current_time;
   voterRoutes.getPollByIdentifier(identifier)
   .then(poll => {
     poll_id = poll.id;
@@ -27,7 +26,16 @@ router.get('/:identifier', (req, res) => {
     descriptions = poll.descriptions;
     candidates.push(titles);
     candidates.push(descriptions);
-
+    return voterRoutes.getExpiredTimeById(poll_id);
+  })
+  .then(time => {
+    expired_time = time['expired_at'];
+    current_time = getCurrentDateAndTime();
+    console.log(expired_time);
+    if (new Date(current_time) > new Date(expired_time) && expired_time != null){
+      message = "You can no longer participate in this poll because the polling period has ended!"
+      return res.redirect('/voter/');
+    }
     res.render('voter', {
       creator: creator_name,
       title: poll_title,
@@ -67,7 +75,16 @@ router.post('/', (req, res) => {
     }
   }
   console.log(score);
-  voterRoutes.addVoter(poll_id, vote)
+  voterRoutes.getExpiredTimeById(poll_id)
+  .then(time => {
+    expired_time = time['expired_at'];
+    current_time = getCurrentDateAndTime();
+    if (new Date(current_time) > new Date(expired_time) && expired_time != null){
+      message = "You can no longer participate in this poll because the polling period has ended!"
+      return res.redirect('/voter/');
+    }
+    return voterRoutes.addVoter(poll_id, vote);
+  })
   .then(voter => {
     voter_id = voter.id;
     for (let i = 0; i < candidate_ranks.length; i++) {
