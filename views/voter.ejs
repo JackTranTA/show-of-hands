@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
 <link rel="stylesheet" href="/styles/main.css"/>
-<link rel="stylesheet" href="/styles/voter-link.scss"/>
+<link rel="stylesheet" href="/styles/voter-link.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
@@ -54,7 +54,7 @@
           <div>
             <%= candidates[1][x] %>
           </div>
-          <label for="rank">Rank:</label> 
+          <label for="rank">Rank:</label>
           <select name="rank" class="rank">
             <option value="0">0</option>
           </select>
@@ -66,5 +66,7 @@
     </section>
   </form>
 </div>
+
+
 
 <%- include('partials/footer') %>

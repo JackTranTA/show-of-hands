@@ -7,11 +7,13 @@
 <body>
 
 <header class="logo">
-  <h1 class="">Show of Hands Logo</h1>
+  <div class="banner">
+    <img src="/icons/logo-text.png" alt="logo" class="img-fluid">
+  </div>
 </header>
 
-<section class="poll-container container-sm pt-5">
-  <form action="/poll/" method="POST" class="form-content needs-validation" novalidate>
+<section class="poll-container container-sm">
+  <form class="form-content needs-validation" id="form" novalidate>
     <h3 class="row d-flex justify-content-center mb-5">Create a poll</h3>
     <div class="row mb-3">
       <div class="col-6 mx-auto">
@@ -106,12 +108,27 @@
 
     <div class="row mb-3">
       <div class="col-3 mx-auto d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">Create poll</button>
+        <button type="submit" class="btn btn-primary submit-button">Create poll</button>
       </div>
     </div>
 
   </form>
 </section>
 
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Congratulation!</h5>
+      </div>
+      <div class="modal-body">
+        <p>The poll has been created successfully. An administrative link will be sent to your email shortly.</p>
+      </div>
+      <div class="modal-footer f-flex justify-content-center">
+        <button type="button" class="btn btn-primary redirect">Return to Front Page</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%- include('partials/footer') %>
