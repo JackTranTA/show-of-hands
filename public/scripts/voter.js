@@ -20,6 +20,20 @@ $(document).ready(function() {
     console.log(rank);
     let i = 0;
     $('select').each(function() {
+      const max = $(this).children('option').last().val();
+      console.log(max);
+      if (max > rank[i]) {
+        for (let j = max; j > rank[i]; j--) {
+          $(this).children('option').last().remove();
+        }
+      } else if (max < rank[i]) {
+        for (let j = max; j < rank[i]; j++) {
+          $(this).append($('<option>', {
+              value: j,
+              text: '' + j
+          }));
+        }
+      }
       $( this ).val(rank[i++]);
     });
   };
@@ -30,12 +44,12 @@ $(document).ready(function() {
   }).focus(function (e) {
     focusState = 1;
     lastFocusValue = $(this).val();
-    for (let i = 0; i < rank.length ; i++) {
+    for (let i = 1; i < rank.length ; i++) {
       if (rank.includes('' + i)) {
-        if($(this).find('option[value="' + (i + 1) + '"]').length < 1) {
+        if($(this).find('option[value="' + (i) + '"]').length < 1) {
           $(this).append($('<option>', {
-              value: i + 1,
-              text: '' + (i + 1)
+              value: i,
+              text: '' + (i)
           }));
         }
       } else {
