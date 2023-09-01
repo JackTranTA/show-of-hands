@@ -54,12 +54,66 @@ $(document).ready(function() {
     deleteButton.closest('.candidate').remove();
   });
 
+  $("#form").submit(function(event){
+    console.log('submit button clicked');
+    event.preventDefault();
+
+  });
+
+  $('.redirect').on('click', function() {
+    $.ajax({
+      type: "GET",
+      url: "/",
+      // data: $("#form").serialize(),
+      success: function(){
+        console.log("redirecting to index");
+        $('.modal').modal('hide');
+        window.location.href = '/';
+      },
+      error: function(){
+        console.log('ajax error');
+      }
+    });
+  })
+  // form validation
   const $form = $('.needs-validation');
   $form.on('submit', function(event) {
-    if (!this.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
+    // if (!this.checkValidity()) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
+    // $form.addClass('was-validated');
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/poll/",
+    //   data: $("#form").serialize(),
+    //   success: function(){
+    //     console.log("POST request successful. Showing modal.");
+    //     $(".modal").modal('show');
+    //   },
+    //   error: function(){
+    //     console.log('ajax error');
+    //   }
+    // });
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.checkValidity()) {
+      $form.addClass('was-validated');
+      $.ajax({
+        type: "POST",
+        url: "/poll/",
+        data: $("#form").serialize(),
+        success: function() {
+          console.log("POST request successful. Showing modal.");
+          $(".modal").modal('show');
+        },
+        error: function() {
+          console.log('ajax error');
+        }
+      });
+    } else {
+      $form.addClass('was-validated');
     }
-    $form.addClass('was-validated');
   });
 });

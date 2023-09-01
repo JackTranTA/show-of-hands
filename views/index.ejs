@@ -6,108 +6,160 @@
 <body>
 
 <header class="logo">
-  <h1 class="">Show of Hands Logo</h1>
+  <div class="banner">
+    <img src="/icons/logo-text.png" alt="logo" class="img-fluid">
+  </div>
 </header>
-
-<div class="header-img">
-
-</div>
-
-<div class="content-container">
-  <div class="intro-container">
-    <div class="intro">
-      <h3>Welcome to Show of Hands!</h3>
-      <p>Where your delicate weekend plans meet group consensus. Jump in, gather your pal's thoughts on the upcoming
-        meetup,
-        the concert everyone's talking about, or the trending topic you can't wait to share with your friends. Let's
-        make
-        every moment a collective decision! </p>
+<div class="container-sm">
+  <div class="intro-container row">
+    <div class="header-img col-6">
+      <img src="/icons/index-image.png" alt="">
     </div>
 
-    <div class="get-started-container">
-      <form action="/" method="POST" class="form-content needs-validation">
-        <div class="form-floating">
-          <input type="text" placeholder="Your name" id="name" name="name" class="form-control" required>
-          <label for="name">Name</label>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-          <div class="invalid-feedback">
-            Please enter your name!
-          </div>
+    <div class="intro-text col-6 row d-flex justify-content-center">
+      <div class="intro col-10">
+        <div class="mb-4">
+          <h3>Welcome to Show of Hands!</h3>
         </div>
-        <div class="form-floating">
-          <input type="email" placeholder="Your email" id="email" name="email" class="form-control" required>
-          <label for="email">Email</label>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-          <div class="invalid-feedback">
-            Please enter your email!
-          </div>
+        <div class="mb-3">
+          <p>Where your delicate weekend plans meet group consensus. Jump in, gather your pal's thoughts on the upcoming
+            meetup,
+            the concert everyone's talking about, or the trending topic you can't wait to share with your friends. Let's
+            make
+            every moment a collective decision!
+          </p>
         </div>
-        <div class="">
-          <button type="submit" class="btn btn-primary">Get Started</button>
-        </div>
-      </form>
+
+      </div>
+
+      <div class="get-started-container col-10">
+        <form action="/" method="POST" class="form-content needs-validation">
+          <div class="form-floating mb-3">
+            <input type="text" placeholder="Your name" id="name" name="name" class="form-control" required>
+            <label for="name">Name</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter your name!
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" placeholder="Your email" id="email" name="email" class="form-control" required>
+            <label for="email">Email</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter your email!
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Get Started</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <hr class="break col-8">
     </div>
   </div>
 
-  <section class="feature-container">
-    <h3 class="feature-title">Features</h3>
-    <div class="feature-content">
-      <div class="feature-icon">
+  <section class="feature-container row ">
+    <div class="col-12 d-flex justify-content-center mb-3">
+      <h3 class="feature-title">Features</h3>
+    </div>
+
+    <div class="feature-content row mb-4">
+      <div class="feature-icon col-4 d-flex justify-content-end">
         <i class="fa-solid fa-user-shield fa-3x"></i>
       </div>
-      <div class="feature">
+      <div class="feature col-8">
         <h4>Secured & Anonymous</h4>
         <p>Your friends can vote without the hassle of signing up and logging in.</p>
       </div>
     </div>
-    <div class="feature-content">
-      <div class="feature-icon">
+    <div class="feature-content row mb-4">
+      <div class="feature-icon col-4 d-flex justify-content-end pe-4">
         <i class="fa-solid fa-bolt fa-3x"></i>
       </div>
-      <div class="feature">
+      <div class="feature col-8 ">
         <h4>Real-time Updates</h4>
         <p>Stay tuned with poll details via administrative link.</p>
       </div>
     </div>
-    <div class='feature-content'>
-      <div class="feature-icon">
+    <div class='feature-content row mb-4'>
+      <div class="feature-icon col-4 d-flex justify-content-end pe-4">
         <i class="fa-solid fa-square-poll-vertical fa-3x"></i>
       </div>
-      <div class="feature">
+      <div class="feature col-8">
         <h4>Advanced Ranking System</h4>
         <p>Using custom Borda count method, we ensure a more accurate representation of preferences.</p>
       </div>
     </div>
+
+    <div class="d-flex justify-content-center">
+      <hr class="break col-8">
+    </div>
   </section>
 
+
   <section class="instruction-container">
-    <div class="instruction-title">
+    <div class="instruction-title col-12 d-flex justify-content-center mb-3">
       <h3>How it works?</h3>
     </div>
-    <div class="instruction-content">
-      <div class="instruction">
-        <h4>1. Create a Poll</h4>
-        <p>Setup your poll with multiple options and set its duration.</p>
+    <div class="instruction-content row">
+
+      <div class="instruction col-12 row mb-4">
+        <div class="col-12 d-flex justify-content-center">
+          <h4>1. Create a Poll</h4>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <p>Setup your poll with multiple options and set its duration.</p>
+        </div>
       </div>
-      <div class="instruction">
-        <h4>2. Share the link</h4>
-        <p>Get two links sent to your email: one for sharing with participants and another for poll management.</p>
+
+      <div class="instruction col-12 row mb-4">
+        <div class="col-12 d-flex justify-content-center">
+          <h4>2. Share the link</h4>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <p>Get two links sent to your email: one for sharing with participants and another for poll management.</p>
+        </div>
       </div>
-      <div class="instruction">
-        <h4>3. Rank it Up</h4>
-        <p>Participants can rank their preference using the shared link.</p>
+
+      <div class="instruction col-12 row mb-4">
+        <div class="col-12 d-flex justify-content-center">
+          <h4>3. Rank it Up</h4>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <p>Participants can rank their preference using the shared link.</p>
+        </div>
       </div>
-      <div class="instruction">
-        <h4>4. Get Real-Time results</h4>
-        <p>Admin can access live poll data, results, and feedback via the administrative link.</p>
+
+      <div class="instruction col-12 row mb-4">
+        <div class="col-12 d-flex justify-content-center">
+          <h4>4. Get Real-Time results</h4>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <p>Admin can access live poll data, results, and feedback via the administrative link.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
 </div>
+
+
+<!--<div class="content-container">-->
+<!--  <div class="intro-container">-->
+<!--    -->
+
+<!--    -->
+<!--  </div>-->
+
+
+<!--</div>-->
 
 <%- include('partials/footer') %>
