@@ -78,23 +78,6 @@ $(document).ready(function() {
   // form validation
   const $form = $('.needs-validation');
   $form.on('submit', function(event) {
-    // if (!this.checkValidity()) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
-    // $form.addClass('was-validated');
-    // $.ajax({
-    //   type: "POST",
-    //   url: "/poll/",
-    //   data: $("#form").serialize(),
-    //   success: function(){
-    //     console.log("POST request successful. Showing modal.");
-    //     $(".modal").modal('show');
-    //   },
-    //   error: function(){
-    //     console.log('ajax error');
-    //   }
-    // });
     event.preventDefault();
     event.stopPropagation();
 
@@ -104,7 +87,8 @@ $(document).ready(function() {
         type: "POST",
         url: "/poll/",
         data: $("#form").serialize(),
-        success: function() {
+        success: function(data) {
+          console.log('data', data);
           console.log("POST request successful. Showing modal.");
           $(".modal").modal('show');
         },
