@@ -7,12 +7,12 @@ const addPoll = (poll, adminId, currentTime, pollEnd, public, adminUrl, voterUrl
     RETURNING *
   `;
   return db.query(queryString, [adminId, poll.title, poll.description, currentTime, pollEnd, public, adminUrl, voterUrl])
-  .then(res => {
-    return res.rows[0];
-  })
-  .catch(err => {
-    return console.error('query error', err.stack);
-  });
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      return console.error('query error', err.stack);
+    });
 };
 
 const addCandidate = (pollId, title, description) => {
@@ -22,12 +22,12 @@ const addCandidate = (pollId, title, description) => {
     RETURNING *
   `;
   return db.query(queryString, [pollId, title, description])
-  .then(res => {
-    return res.rows[0];
-  })
-  .catch(err => {
-    return console.error('query error', err.stack);
-  });
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      return console.error('query error', err.stack);
+    });
 };
 
 module.exports = { addPoll, addCandidate };

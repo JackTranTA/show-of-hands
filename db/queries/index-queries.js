@@ -7,12 +7,12 @@ const addAdmin = (admin) => {
     RETURNING *
   `;
   return db.query(queryString, [admin.email, admin.name])
-  .then(res => {
-    return res.rows[0];
-  })
-  .catch(err => {
-    return console.error('query error', err.stack);
-  });
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      return console.error('query error', err.stack);
+    });
 };
 
 module.exports = {addAdmin};

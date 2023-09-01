@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 const getPollByIdentifier = (identifier) => {
-  const queryString =`
+  const queryString = `
     SELECT polls.id, admins.name AS creator_name, polls.title, polls.description, send_result, ARRAY_AGG(poll_options.id) AS candidate_ids, ARRAY_AGG(poll_options.title) AS titles, ARRAY_AGG(poll_options.description) AS descriptions
     FROM polls
     JOIN poll_options ON polls.id = poll_id
@@ -10,13 +10,12 @@ const getPollByIdentifier = (identifier) => {
     GROUP BY polls.id, creator_name, polls.title, polls.description, send_result;
   `;
   return db.query(queryString, [identifier])
-  .then(data => {
-    console.log(data.rows[0]);
-    return data.rows[0];
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
 };
 
 const addVoter = (pollId, voter) => {
@@ -26,12 +25,12 @@ const addVoter = (pollId, voter) => {
     RETURNING *
   `;
   return db.query(queryString, [pollId, voter.name, voter.email, voter.comment])
-  .then(res => {
-    return res.rows[0];
-  })
-  .catch(err => {
-    return console.error('query error', err.stack);
-  });
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      return console.error('query error', err.stack);
+    });
 };
 
 const addPollRank = (candidateId, voterId, score) => {
@@ -41,12 +40,27 @@ const addPollRank = (candidateId, voterId, score) => {
     RETURNING *
   `;
   return db.query(queryString, [candidateId, voterId, score])
-  .then(res => {
-    return res.rows[0];
-  })
-  .catch(err => {
-    return console.error('query error', err.stack);
-  });
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      return console.error('query error', err.stack);
+    });
 };
 
-module.exports = { getPollByIdentifier, addVoter, addPollRank };
+const getExpiredTimeById = (id) => {
+  const queryString = `
+    SELECT expired_at
+    FROM polls
+    WHERE id = $1;
+  `;
+  return db.query(queryString, [id])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
+};
+
+module.exports = { getPollByIdentifier, addVoter, addPollRank, getExpiredTimeById };

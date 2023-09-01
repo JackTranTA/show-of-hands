@@ -6,47 +6,56 @@ $(document).ready(function() {
   let focusState = 0;
 
   $('select').each(function() {
-    rank.push($( this ).val());
+    rank.push($(this).val());
   });
-  console.log(rank);
 
-  const changeWithRepeats = function (index, newestValue) {
+  const changeWithRepeats = function(index, newestValue) {
     if (rank.includes(newestValue)) {
-      console.log(rank.indexOf(newestValue));
-      rank[rank.indexOf(newestValue)] = lastFocusValue;
+      const index2 = rank.indexOf(newestValue);
+      rank[index2] = lastFocusValue;
+      const max = $("select").eq(index2).children('option').last().val();
+      if (max < lastFocusValue) {
+        for (let i = Number(max); i < lastFocusValue; i++) {
+          $("select").eq(index2).append($('<option>', {
+            value: i + 1,
+            text: '' + (Number(i) + 1)
+          }));
+        }
+        for (let i = lastFocusValue; i > max; i--) {
+          $("select").eq(index).children('option').last().remove();
+        }
+      }
     }
-    console.log(index);
     rank[index] = newestValue;
-    console.log(rank);
     let i = 0;
     $('select').each(function() {
-      $( this ).val(rank[i++]);
+      $(this).val(rank[i++]);
     });
   };
 
-  $('select').click(function () {
-    if (focusState == 1) { focusState = 2; return; }
-    else if (focusState == 2) $(this).blur();
-  }).focus(function (e) {
+  $('select').click(function() {
+    if (focusState == 1) {
+      focusState = 2; return;
+    } else if (focusState == 2) $(this).blur();
+  }).focus(function(e) {
     focusState = 1;
     lastFocusValue = $(this).val();
-    for (let i = 0; i < rank.length ; i++) {
-      if (rank.includes('' + i)) {
-        if($(this).find('option[value="' + (i + 1) + '"]').length < 1) {
+    for (let i = 1; i <= rank.length + 1; i++) {
+      if (rank.includes('' + i) && lastFocusValue != i) {
+        if ($(this).find('option[value="' + (i + 1) + '"]').length < 1) {
           $(this).append($('<option>', {
-              value: i + 1,
-              text: '' + (i + 1)
+            value: i + 1,
+            text: '' + (i + 1)
           }));
         }
       } else {
         break;
       }
     }
-  }).blur(function () {
+  }).blur(function() {
     focusState = 0;
-  }).change (function () {
+  }).change(function() {
     thisIndex = $("select").index($(this));
-    console.log(thisIndex);
     changeWithRepeats(thisIndex, $(this).val());
   });
 
