@@ -1,7 +1,8 @@
 <%- include('partials/header') %>
 <link rel="stylesheet" href="/styles/main.css"/>
-<link rel="stylesheet" href="/styles/voter-link.scss"/>
+<link rel="stylesheet" href="/styles/voter-link.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script defer type="text/javascript" src="/scripts/voter.js"></script>
 </head>
 
 <body>
@@ -11,23 +12,29 @@
 
 <div class="poll-container">
 
-    <div class="welcome-message">
-      <p> Welcome to poll <%= title %> created by <%= creator %>!
-
-      We're excited to have you here. Your input is invaluable to us. Please take a few moments to cast your votes on the questions below.
-
-      Happy Voting!</p>
+  <div class="row mb-3">
+    <div class="col-6 mx-auto">
+      Welcome to poll <%= title %> created by <%= creator %>!
     </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-8 mx-auto">
+      <%= description %>
+    </div>
+  </div>
 
   <form action="/voter/" method="POST" class="form-content needs-validation" novalidate>
-    <div class="form-floating">
-      <input type="text" placeholder="Your name" id="name" name="name" class="form-control" required>
-      <label for="name">Name</label>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please enter your name!
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <input type="text" placeholder="Your name" id="name" name="name" class="form-control" required>
+        <label for="name">Name</label>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter your name!
+        </div>
       </div>
     </div>
     <% if (public === true) { %>
@@ -45,26 +52,36 @@
     <section class="candidate-container">
       <% for (let x = 0; x < candidates[0].length; x++) { %>
         <article>
-          <divclass="form-floating">
+          <div class="form-floating">
             <%= candidates[0][x] %>
           </div>
-          <div>
-            <button type="button" id="show-description" class="btn btn-primary">Description</button>
-          </div>
+          <% if ( candidates[1][x] !== '' ) { %>
+            <div>
+              <button type="button" id="show-description" class="btn btn-primary">Description</button>
+            </div>
+          <% } %>
           <div>
             <%= candidates[1][x] %>
           </div>
-          <label for="rank">Rank:</label> 
+          <label for="rank">Rank:</label>
           <select name="rank" class="rank">
             <option value="0">0</option>
           </select>
         </article>
       <% } %>
-      <div>
-        <button type="submit" class="btn btn-primary">Create poll</button>
-      </div>
     </section>
+    <div class="row mb-3">
+      <div class="col-8 mx-auto">
+        <input type="text" placeholder="Your feedback" id="comment" name="comment" class="form-control" required>
+        <label for="comment">Comment</label>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </div>
+
+
 
 <%- include('partials/footer') %>

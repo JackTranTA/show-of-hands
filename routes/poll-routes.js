@@ -28,7 +28,8 @@ router.post('/', (req, res) => {
       console.log("candidate", poll[candidate[0]], poll[candidate[1]]);
       pollRoutes.addCandidate(polls.id, poll[candidate[0]], poll[candidate[1]]);
     }
-    res.redirect('/');
+    res.send('success');
+    // res.redirect('/');
   })
   .catch(e => {
     console.log(e);
