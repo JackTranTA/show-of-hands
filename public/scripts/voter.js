@@ -16,15 +16,13 @@ $(document).ready(function() {
       rank[index2] = lastFocusValue;
       const max = $( "select" ).eq(index2).children('option').last().val();
       if (max < lastFocusValue) {
-        for (let i = Number(max); i <= lastFocusValue; i++) {
+        for (let i = Number(max); i < lastFocusValue; i++) {
           $( "select" ).eq(index2).append($('<option>', {
               value: i + 1,
               text: '' + (Number(i) + 1)
           }));
         }
-        console.log(lastFocusValue);
-        for (let i = max; i < lastFocusValue; i++) {
-          console.log(max);
+        for (let i = lastFocusValue; i > max; i--) {
           $( "select" ).eq(index).children('option').last().remove();
         }
       }
@@ -45,6 +43,8 @@ $(document).ready(function() {
     lastFocusValue = $(this).val();
     for (let i = 1; i <= rank.length + 1; i++) {
       if (rank.includes('' + i) && lastFocusValue != i) {
+        console.log(i + 1);
+        console.log($(this).find('option[value="' + (i + 1) + '"]').length);
         if($(this).find('option[value="' + (i + 1) + '"]').length < 1) {
           $(this).append($('<option>', {
               value: i + 1,
