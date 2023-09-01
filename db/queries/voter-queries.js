@@ -49,4 +49,20 @@ const addPollRank = (candidateId, voterId, score) => {
   });
 };
 
-module.exports = { getPollByIdentifier, addVoter, addPollRank };
+const getExpiredTimeById = (id) => {
+  const queryString = `
+    SELECT expired_at
+    FROM polls
+    WHERE id = $1;
+  `
+  return db.query(queryString, [id])
+  .then(data => {
+    console.log(data.rows[0]); //hard coded voter link
+    return data.rows[0];
+  })
+  .catch(e => {
+    return console.error('query error', e.stack);
+  });
+};
+
+module.exports = { getPollByIdentifier, addVoter, addPollRank, getExpiredTimeById };
