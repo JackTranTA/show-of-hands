@@ -1,4 +1,8 @@
 const express = require('express');
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'c225bb06bf3d6151947b7716e7da3916-451410ff-6bff0f3a'});
 const router  = express.Router();
 const pollRoutes = require("../db/queries/poll-queries");
 const { generateRandomString } = require('../scripts/helpers/generateRandomString.js');
@@ -17,9 +21,9 @@ router.post('/', (req, res) => {
     public = "FALSE";
   }
   const pollEnd = poll.end.split('T').join(' ');
-  console.log("end", pollEnd);
-  console.log("start", getCurrentDateAndTime());
-  pollRoutes.addPoll(poll, req.session.adminId, getCurrentDateAndTime(), pollEnd, public, generateRandomString(), generateRandomString())
+  const adminUrl = generateRandomString();
+  const voterUrl = generateRandomString();
+  pollRoutes.addPoll(poll, req.session.adminId, getCurrentDateAndTime(), pollEnd, public, adminUrl, voterUrl)
   .then(polls => {
     const keys = Object.keys(poll);
     const candidates = keys.filter((key) => key.includes('candidate-'));
@@ -29,7 +33,15 @@ router.post('/', (req, res) => {
       pollRoutes.addCandidate(polls.id, poll[candidate[0]], poll[candidate[1]]);
     }
     res.send('success');
-    // res.redirect('/');
+
+    mg.messages.create('sandbox8deea2e3a5154db1af066f26786a5d00.mailgun.org', {
+    from: "Lighthouse Labs <mailgun@sandbox8deea2e3a5154db1af066f26786a5d00.mailgun.org>",
+    to: [req.session.adminEmail],
+    subject: "Show of hands! Get ready to poll!",
+    text: "http://localhost:8080/admin/" + adminUrl
+    })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.log(err)); // logs any error
   })
   .catch(e => {
     console.log(e);
