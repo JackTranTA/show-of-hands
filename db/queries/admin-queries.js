@@ -55,14 +55,14 @@ const getVotesDetailById = (id) => {
     SELECT voters.name                          AS voter_name,
            voters.id                            AS voter_id,
            voters.poll_id,
-           comments,
+           comment,
            ARRAY_AGG(poll_options.title) AS selected_options_titles,
            ARRAY_AGG(score)                     AS scores
     FROM poll_selections
            JOIN voters ON poll_selections.voter_id = voters.id
            JOIN poll_options ON poll_selections.poll_option_id = poll_options.id
     WHERE voters.poll_id = $1
-    GROUP BY voters.id, voters.poll_id, comments
+    GROUP BY voters.id, voters.poll_id, comment
     ORDER BY voter_id;
   `;
   return db.query(queryString, [id])
