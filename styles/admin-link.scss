@@ -24,53 +24,72 @@
     }
   }
 }
+
 .body-container {
-
-  @include flexbox($direction: column, $justify: flex-start, $align: center);
-  margin: 0 20% 0 20%;
   padding-top: 120px;
-  row-gap: 2rem;
+  padding-bottom: 120px;
   background-color: #EEEEEE;
-  min-height: 100%;
-  max-width: 80%;
-
-  .voter-link-container {
-    @include flexbox($direction: column, $justify: flex-start, $align: center);
-    row-gap: 1rem;
-    .voter-link {
-      @include flexbox($direction: row, $justify: space-between, $align: center);
-      column-gap: 2rem;
-      textarea {
-        width: 90%;
-        min-width: 90%;
-        max-width: 90%;
-        height: 1.5rem;
-      }
-    }
-  }
-
-  .chart-container {
-    @include flexbox($direction: column, $justify: flex-start, $align: center);
-    row-gap: 1rem;
-
-    canvas {
-      min-width: 400px;
-    }
-  }
-
-  .poll-detail-container {
-    @include flexbox($direction: column, $justify: flex-start, $align: center);
-    row-gap: 1rem;
-
-    .poll-detail {
-      @include flexbox($direction: row, $justify: center, $align: flex-start);
-      column-gap: 2rem;
-      border-top: 2px solid darkgrey;
-
-      .poll-selection {
-        @include flexbox($direction: column, $justify: flex-start, $align: center);
-        row-gap: 0.5rem;
-      }
-    }
-  }
+  height: 100%;
 }
+
+textarea {
+  resize: vertical;
+  width: 300px;
+  height: 2.5rem;
+}
+
+canvas {
+  min-width: 400px;
+  max-width: 800px;
+}
+
+//.body-container {
+//
+//  @include flexbox($direction: column, $justify: flex-start, $align: center);
+//  margin: 0 20% 0 20%;
+//  padding-top: 120px;
+//  row-gap: 2rem;
+//  background-color: #EEEEEE;
+//  min-height: 100%;
+//  max-width: 80%;
+//
+//  .voter-link-container {
+//    @include flexbox($direction: column, $justify: flex-start, $align: center);
+//    row-gap: 1rem;
+//    .voter-link {
+//      @include flexbox($direction: row, $justify: space-between, $align: center);
+//      column-gap: 2rem;
+//      textarea {
+//        width: 90%;
+//        min-width: 90%;
+//        max-width: 90%;
+//        height: 1.5rem;
+//      }
+//    }
+//  }
+//
+//  .chart-container {
+//    @include flexbox($direction: column, $justify: flex-start, $align: center);
+//    row-gap: 1rem;
+//
+//    canvas {
+//      min-width: 400px;
+//    }
+//  }
+//
+//  .poll-detail-container {
+//    @include flexbox($direction: column, $justify: flex-start, $align: center);
+//    row-gap: 1rem;
+//
+//    .poll-detail {
+//      @include flexbox($direction: row, $justify: center, $align: flex-start);
+//      column-gap: 2rem;
+//      border-top: 2px solid darkgrey;
+//
+//      .poll-selection {
+//        @include flexbox($direction: column, $justify: flex-start, $align: center);
+//        row-gap: 0.5rem;
+//      }
+//    }
+//  }
+//}
