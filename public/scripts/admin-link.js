@@ -9,6 +9,23 @@ $(() => {
     }).catch((err) => {
       $('.copy-message').html("<p class='copy-message'>Unable to copy selected text!</p>");
     });
+  });
+
+  $('.end-button').on('click', function() {
+    const $button = $(this);
+    const urlParts = window.location.pathname.split('/');
+    const identifier = urlParts[urlParts.length - 1];
+    $.ajax({
+      type: "POST",
+      url: `/admin/${identifier}`,
+      success: function(){
+        $button.text('Poll Ended');
+        $button.prop('disabled', true);
+      },
+      error: function(){
+        console.log('ajax error');
+      }
+    });
   })
 });
 
@@ -26,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return color;
   }
 
-
   for (const result of results) {
     labels.push(result['title']);
     values.push(result['sum']);
@@ -35,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
   for (let i = 0; i < labels.length; i++) {
     colors.push(generateColor());
   }
-  console.log(labels);
-  console.log(values);
-  console.log(colors);
+  // console.log(labels);
+  // console.log(values);
+  // console.log(colors);
 
 
   new Chart('barChart', {
