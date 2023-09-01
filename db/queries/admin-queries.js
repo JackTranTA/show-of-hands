@@ -7,12 +7,12 @@ const getPollIdByIdentifier = (identifier) => {
     WHERE admin_identifier = $1;
   `;
   return db.query(queryString, [identifier])
-  .then(data => {
-    return data.rows[0];
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
 };
 
 const getVoterLinkById = (id) => {
@@ -20,14 +20,14 @@ const getVoterLinkById = (id) => {
     SELECT voter_identifier
     FROM polls
     WHERE id = $1;
-  `
+  `;
   return db.query(queryString, [id])
-  .then(data => {
-    return `localhost:8080/voters/${data.rows[0]['voter_identifier']}`;
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
+    .then(data => {
+      return `localhost:8080/voters/${data.rows[0]['voter_identifier']}`;
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
 };
 
 const getExpiredTimeById = (id) => {
@@ -35,14 +35,14 @@ const getExpiredTimeById = (id) => {
     SELECT expired_at
     FROM polls
     WHERE id = $1;
-  `
+  `;
   return db.query(queryString, [id])
-  .then(data => {
-    return data.rows[0];
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
 };
 
 const getPollResultsById = (id) => {
@@ -55,12 +55,12 @@ const getPollResultsById = (id) => {
   `;
 
   return db.query(queryString, [id])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
+    .then(data => {
+      return data.rows;
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
 };
 
 const getVotesDetailById = (id) => {
@@ -79,12 +79,12 @@ const getVotesDetailById = (id) => {
     ORDER BY voter_id;
   `;
   return db.query(queryString, [id])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
+    .then(data => {
+      return data.rows;
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
 };
 
 const endPoll = (currentTime, id) => {
@@ -96,13 +96,13 @@ const endPoll = (currentTime, id) => {
   `;
 
   db.query(queryString, [currentTime, id])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(e => {
-    return console.error('query error', e.stack);
-  });
-}
+    .then(data => {
+      return data.rows;
+    })
+    .catch(e => {
+      return console.error('query error', e.stack);
+    });
+};
 
 
 

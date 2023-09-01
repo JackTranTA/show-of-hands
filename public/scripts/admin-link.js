@@ -1,13 +1,13 @@
 $(() => {
   const $copy = $('.copy');
-  $copy.on('click', function(){
+  $copy.on('click', function() {
     const textToCopy = $('.link').val();
     navigator.clipboard.writeText(textToCopy)
-    .then(() => {
-      $('.copy-message').html("<p class='copy-message'>Text copied successfully!</p>");
-    }).catch((err) => {
-      $('.copy-message').html("<p class='copy-message'>Unable to copy selected text!</p>");
-    });
+      .then(() => {
+        $('.copy-message').html("<p class='copy-message'>Text copied successfully!</p>");
+      }).catch((err) => {
+        $('.copy-message').html("<p class='copy-message'>Unable to copy selected text!</p>");
+      });
   });
 
   $('.end-button').on('click', function() {
@@ -17,18 +17,18 @@ $(() => {
     $.ajax({
       type: "POST",
       url: `/admin/${identifier}`,
-      success: function(){
+      success: function() {
         $button.text('Poll Ended');
         $button.prop('disabled', true);
       },
-      error: function(){
+      error: function() {
         console.log('ajax error');
       }
     });
-  })
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   let labels = [];
   let values = [];
   let colors = [];

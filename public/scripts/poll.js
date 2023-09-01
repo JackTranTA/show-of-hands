@@ -36,7 +36,7 @@ const addCandidate = function(count) {
     </div>`;
 
   return $candidate;
-}
+};
 
 $(document).ready(function() {
   let count = 1;
@@ -44,7 +44,7 @@ $(document).ready(function() {
     "min" : getCurrentDateAndTime()
   });
 
-  $("#add-candidate").on('click', function(){
+  $("#add-candidate").on('click', function() {
     count++;
     $(".add-candidate-container").before(addCandidate(count));
   });
@@ -54,7 +54,7 @@ $(document).ready(function() {
     deleteButton.closest('.candidate').remove();
   });
 
-  $("#form").submit(function(event){
+  $("#form").submit(function(event) {
     console.log('submit button clicked');
     event.preventDefault();
 
@@ -64,16 +64,16 @@ $(document).ready(function() {
     $.ajax({
       type: "GET",
       url: "/",
-      success: function(){
+      success: function() {
         console.log("redirecting to index");
         $('.modal').modal('hide');
         window.location.href = '/';
       },
-      error: function(){
+      error: function() {
         console.log('ajax error');
       }
     });
-  })
+  });
   // form validation
   const $form = $('.needs-validation');
   $form.on('submit', function(event) {

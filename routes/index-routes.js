@@ -9,15 +9,15 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const admin = req.body;
   IndexRoutes.addAdmin(admin)
-  .then(admin => {
-    req.session.adminId = admin.id;
-    req.session.adminEmail = admin.email;
-    return res.redirect('/poll');
-  })
-  .catch(e => {
-    console.log(e);
-    res.send(e);
-  })
+    .then(admin => {
+      req.session.adminId = admin.id;
+      req.session.adminEmail = admin.email;
+      return res.redirect('/poll');
+    })
+    .catch(e => {
+      console.log(e);
+      res.send(e);
+    });
 });
 
 module.exports = router;

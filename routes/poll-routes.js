@@ -16,39 +16,39 @@ router.post('/', (req, res) => {
   let pollEnd;
   const poll = req.body;
   let public;
-  if(poll.public === "on") {
+  if (poll.public === "on") {
     public = "TRUE";
   } else {
     public = "FALSE";
   }
-  if (poll.end != '') {
+  if (poll.end !== '') {
     pollEnd = poll.end.split('T').join(' ');
   }
   const adminUrl = generateRandomString();
   const voterUrl = generateRandomString();
   pollRoutes.addPoll(poll, req.session.adminId, getCurrentDateAndTime(), pollEnd, public, adminUrl, voterUrl)
-  .then(polls => {
-    const keys = Object.keys(poll);
-    const candidates = keys.filter((key) => key.includes('candidate-'));
-    for (let i = 0; i < candidates.length/2; i++) {
-      const candidate = keys.filter((key) => key.includes('-' + i));
-      pollRoutes.addCandidate(polls.id, poll[candidate[0]], poll[candidate[1]]);
-    }
-    res.send('success');
+    .then(polls => {
+      const keys = Object.keys(poll);
+      const candidates = keys.filter((key) => key.includes('candidate-'));
+      for (let i = 0; i < candidates.length / 2; i++) {
+        const candidate = keys.filter((key) => key.includes('-' + i));
+        pollRoutes.addCandidate(polls.id, poll[candidate[0]], poll[candidate[1]]);
+      }
+      res.send('success');
 
-    mg.messages.create('sandbox8deea2e3a5154db1af066f26786a5d00.mailgun.org', {
-    from: "Lighthouse Labs <mailgun@sandbox8deea2e3a5154db1af066f26786a5d00.mailgun.org>",
-    to: [req.session.adminEmail],
-    subject: "Show of hands! Get ready to poll!",
-    text: "http://localhost:8080/admin/" + adminUrl
+      mg.messages.create('sandbox8deea2e3a5154db1af066f26786a5d00.mailgun.org', {
+        from: "Lighthouse Labs <mailgun@sandbox8deea2e3a5154db1af066f26786a5d00.mailgun.org>",
+        to: [req.session.adminEmail],
+        subject: "Show of hands! Get ready to poll!",
+        text: "http://localhost:8080/admin/" + adminUrl
+      })
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.log(err)); // logs any error
     })
-    .then(msg => console.log(msg)) // logs response data
-    .catch(err => console.log(err)); // logs any error
-  })
-  .catch(e => {
-    console.log(e);
-    res.send(e);
-  })
+    .catch(e => {
+      console.log(e);
+      res.send(e);
+    });
 });
 
 module.exports = router;
