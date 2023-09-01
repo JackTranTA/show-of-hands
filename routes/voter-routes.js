@@ -20,18 +20,18 @@ router.get('/:identifier', (req, res) => {
     poll_title = poll.title;
     poll_description = poll.description;
     public = poll.send_result;
-    console.log(poll.description);
+
     candidate_ids = poll.candidate_ids;
     titles = poll.titles;
     descriptions = poll.descriptions;
     candidates.push(titles);
     candidates.push(descriptions);
+
     return voterRoutes.getExpiredTimeById(poll_id);
   })
   .then(time => {
     expired_time = time['expired_at'];
     current_time = getCurrentDateAndTime();
-    console.log(expired_time);
     if (new Date(current_time) > new Date(expired_time) && expired_time != null){
       message = "You can no longer participate in this poll because the polling period has ended!"
       return res.redirect('/voter/');
@@ -56,17 +56,14 @@ router.post('/', (req, res) => {
   const vote = req.body;
   const score = [];
 
-  console.log('return vote', vote);
   let voter_id, candidate_ranks;
   let n = 1;
   candidate_ranks = vote.rank;
-  console.log(candidate_ranks);
   for (const rank of candidate_ranks) {
     if (rank != 0) {
       n++;
     }
   }
-  console.log('n:', n);
   for (rank of candidate_ranks) {
     if (rank == 0) {
       score.push('0');
@@ -74,7 +71,6 @@ router.post('/', (req, res) => {
       score.push('' + (n - rank))
     }
   }
-  console.log(score);
   voterRoutes.getExpiredTimeById(poll_id)
   .then(time => {
     expired_time = time['expired_at'];

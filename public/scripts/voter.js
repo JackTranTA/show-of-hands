@@ -8,7 +8,6 @@ $(document).ready(function() {
   $('select').each(function() {
     rank.push($( this ).val());
   });
-  console.log(rank);
 
   const changeWithRepeats = function (index, newestValue) {
     if (rank.includes(newestValue)) {
@@ -28,7 +27,6 @@ $(document).ready(function() {
       }
     }
     rank[index] = newestValue;
-    console.log(rank);
     let i = 0;
     $('select').each(function() {
       $( this ).val(rank[i++]);
@@ -43,8 +41,6 @@ $(document).ready(function() {
     lastFocusValue = $(this).val();
     for (let i = 1; i <= rank.length + 1; i++) {
       if (rank.includes('' + i) && lastFocusValue != i) {
-        console.log(i + 1);
-        console.log($(this).find('option[value="' + (i + 1) + '"]').length);
         if($(this).find('option[value="' + (i + 1) + '"]').length < 1) {
           $(this).append($('<option>', {
               value: i + 1,

@@ -11,7 +11,6 @@ const getPollByIdentifier = (identifier) => {
   `;
   return db.query(queryString, [identifier])
   .then(data => {
-    console.log(data.rows[0]);
     return data.rows[0];
   })
   .catch(e => {
@@ -57,7 +56,6 @@ const getExpiredTimeById = (id) => {
   `
   return db.query(queryString, [id])
   .then(data => {
-    console.log(data.rows[0]); //hard coded voter link
     return data.rows[0];
   })
   .catch(e => {

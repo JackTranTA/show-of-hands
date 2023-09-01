@@ -8,7 +8,6 @@ const getPollIdByIdentifier = (identifier) => {
   `;
   return db.query(queryString, [identifier])
   .then(data => {
-    console.log(data.rows[0]);
     return data.rows[0];
   })
   .catch(e => {
@@ -24,7 +23,6 @@ const getVoterLinkById = (id) => {
   `
   return db.query(queryString, [id])
   .then(data => {
-    console.log(data.rows[0]); //hard coded voter link
     return `localhost:8080/voters/${data.rows[0]['voter_identifier']}`;
   })
   .catch(e => {
@@ -40,7 +38,6 @@ const getExpiredTimeById = (id) => {
   `
   return db.query(queryString, [id])
   .then(data => {
-    console.log(data.rows[0]); //hard coded voter link
     return data.rows[0];
   })
   .catch(e => {
@@ -83,7 +80,6 @@ const getVotesDetailById = (id) => {
   `;
   return db.query(queryString, [id])
   .then(data => {
-    console.log(data.rows);
     return data.rows;
   })
   .catch(e => {
@@ -101,7 +97,6 @@ const endPoll = (currentTime, id) => {
 
   db.query(queryString, [currentTime, id])
   .then(data => {
-    console.log(data.rows);
     return data.rows;
   })
   .catch(e => {

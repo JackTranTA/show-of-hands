@@ -9,27 +9,22 @@ router.get('/:identifier', (req, res) => {
   adminRoutes.getPollIdByIdentifier(identifier)
   .then(poll => {
       poll_id = poll.id;
-      //console.log('id', poll_id);
       return adminRoutes.getExpiredTimeById(poll_id);
   })
   .then(time => {
     expired_time = time['expired_at'];
-    console.log('expired time', expired_time);
     return adminRoutes.getPollResultsById(poll_id);
   })
   .then(results => {
     result = results;
-    //console.log('results', result);
     return adminRoutes.getVoterLinkById(poll_id);
   })
   .then(url => {
     voterUrl = url;
-    //console.log('url', url);
     return adminRoutes.getVotesDetailById(poll_id);
   })
   .then(detail => {
     voteDetail = detail;
-    console.log('vote detail', voteDetail);
     res.render('poll-results', {
       currentTime: getCurrentDateAndTime(),
       expiredTime: expired_time,
@@ -53,7 +48,6 @@ router.post('/:identifier', (req, res) => {
   .then(poll => {
     poll_id = poll.id;
     current_time = getCurrentDateAndTime();
-    console.log('currentTime', current_time);
     return adminRoutes.endPoll(current_time, poll_id);
   })
   .then(data => {

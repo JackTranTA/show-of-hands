@@ -64,7 +64,6 @@ $(document).ready(function() {
     $.ajax({
       type: "GET",
       url: "/",
-      // data: $("#form").serialize(),
       success: function(){
         console.log("redirecting to index");
         $('.modal').modal('hide');
@@ -88,7 +87,6 @@ $(document).ready(function() {
         url: "/poll/",
         data: $("#form").serialize(),
         success: function(data) {
-          console.log('data', data);
           console.log("POST request successful. Showing modal.");
           $(".modal").modal('show');
         },

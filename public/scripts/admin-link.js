@@ -2,7 +2,6 @@ $(() => {
   const $copy = $('.copy');
   $copy.on('click', function(){
     const textToCopy = $('.link').val();
-    console.log(textToCopy);
     navigator.clipboard.writeText(textToCopy)
     .then(() => {
       $('.copy-message').html("<p class='copy-message'>Text copied successfully!</p>");
@@ -51,10 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
   for (let i = 0; i < labels.length; i++) {
     colors.push(generateColor());
   }
-  // console.log(labels);
-  // console.log(values);
-  // console.log(colors);
-
 
   new Chart('barChart', {
     type: 'horizontalBar',
