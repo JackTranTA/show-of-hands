@@ -54,8 +54,6 @@ $(document).ready(function() {
     deleteButton.closest('.candidate').remove();
   });
 
-  // form validation
-
   const $form = $('.needs-validation');
   $form.on('submit', function(event) {
     if (!this.checkValidity()) {
