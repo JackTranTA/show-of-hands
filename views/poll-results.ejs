@@ -98,7 +98,7 @@
     </div>
   </div>
 
-  <% if (new Date(currentTime) < new Date(expiredTime)) { %>
+  <% if (new Date(currentTime) < new Date(expiredTime) || expiredTime == null) { %>
   <div class="d-flex justify-content-center mt-5">
     <button class="end-button btn btn-primary">End the Poll</button>
   </div>
