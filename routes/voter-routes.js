@@ -3,6 +3,13 @@ const router  = express.Router();
 const voterRoutes = require("../db/queries/voter-queries");
 let poll_id, candidate_ids;
 
+
+router.get('/', (req, res) => {
+  res.render('confirmation');
+});
+
+
+
 router.get('/:identifier', (req, res) => {
   const identifier = req.params.identifier;
   const candidates = [];
@@ -14,7 +21,7 @@ router.get('/:identifier', (req, res) => {
     poll_title = poll.title;
     poll_description = poll.description;
     public = poll.send_result;
-
+    console.log(poll.description);
     candidate_ids = poll.candidate_ids;
     titles = poll.titles;
     descriptions = poll.descriptions;
@@ -46,7 +53,7 @@ router.post('/', (req, res) => {
   let n = 1;
   candidate_ranks = vote.rank;
   console.log(candidate_ranks);
-  for (rank of candidate_ranks) {
+  for (const rank of candidate_ranks) {
     if (rank != 0) {
       n++;
     }
@@ -66,12 +73,14 @@ router.post('/', (req, res) => {
     for (let i = 0; i < candidate_ranks.length; i++) {
       voterRoutes.addPollRank(candidate_ids[i], voter_id, score[i]);
     }
-    res.redirect('/');
+    // res.send('success');
+    res.redirect('/voter/');
   })
   .catch(e => {
     console.log(e);
     res.send(e);
   })
 });
+
 
 module.exports = router;
